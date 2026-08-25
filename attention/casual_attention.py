@@ -42,16 +42,16 @@ e = Data()
 d_in = e.shape[-1]
 d_out = 4
 cl = e.shape[1]
-d=0.5
+drop=0.5
 
 # s = CasualAttention(d_in=d_in, d_out=d_out,context_length=cl,dropout=d)
 # f = s.forward(e)
 
 heads = torch.nn.ModuleList(
     [CasualAttention(
-        d_in=d_in, d_out=d_out, context_length=cl, dropout=d
+        d_in=d_in, d_out=d_out, context_length=cl, dropout=drop
         )
      for _ in range(2)]
 )
-
-print(heads.shape)
+'''Here a stack f instances is being created'
+# print(heads.shape)
