@@ -37,11 +37,11 @@ class CasualAttention(torch.nn.Module):
 
 from tokenizer.Dataset_V1 import Data
 
-e = Data()
+data = Data()
 
-d_in = e.shape[-1]
+d_in = data.shape[-1]
 d_out = 4
-cl = e.shape[1]
+cl = data.shape[1]
 drop=0.5
 
 # s = CasualAttention(d_in=d_in, d_out=d_out,context_length=cl,dropout=d)
@@ -53,5 +53,10 @@ heads = torch.nn.ModuleList(
         )
      for _ in range(2)]
 )
+
+context = []
+for head in heads():
+    context_vec = head(data)
+    context.append(context_vec)
 '''Here a stack f instances is being created'
 # print(heads.shape)
