@@ -16,7 +16,7 @@ class MultiHeadAttention(nn.Module):
         self.W_key   = nn.Linear(d_in, d_out, bias=qkv_bias)
         self.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)
 
-        self.dropout = torch.dropout(dropout)
+        self.dropout = torch.nn.Dropout(dropout)
 
         self.out_projection = nn.Linear(d_out, d_out)
 
@@ -42,7 +42,7 @@ class MultiHeadAttention(nn.Module):
         attention_scores = queries @ keys.transpose(2,3)
 
         mask_bool = self.mask.bool()[:num_tokens, :num_tokens]
-        attention_scores.maksed_fill_(mask_bool, -torch.inf)
+        attention_scores.masked_fill_(mask_bool, -torch.inf)
 
         dk = keys.shape[-1]
         attention_weights = torch.softmax(
@@ -61,12 +61,15 @@ class MultiHeadAttention(nn.Module):
 
 from tokenizer.Dataset_V1 import Data
 
-batch = Data()
+train_data = Data()
 
-print(batch)
-# batch_size, num_tokens, d_in = None
-# attention = MultiHeadAttention(
-#     d_in=d_in, d_out=d_in, context_length=num_tokens,
-#     num_heads=12, dropout=0.5, qkv_bias=False
-# )
+for x, y in train_data:
+    batch_size, num_tokens, d_in = x.shape
+    attention = MultiHeadAttention(
+        d_in=d_in, d_out=d_in, context_length=num_tokens,
+        num_heads=12, dropout=0.5, qkv_bias=False
+    )
+    
+
+    
 

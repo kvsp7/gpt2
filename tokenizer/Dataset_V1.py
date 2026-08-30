@@ -48,14 +48,16 @@ def Data():
                                     stride=128, shuffle=False)
 
     vocab_size = tokenizer.n_vocab
-    output_dims = 256
+    output_dims = 768
 
     embedding_layer = torch.nn.Embedding(vocab_size, output_dims)
     pos_embedding_layer = torch.nn.Embedding(max_length, output_dims)
+    pos = pos_embedding_layer(torch.arange(max_length))
 
     data = []
     for x,y in dataloader:
-        data.append((x, y))
+        X = embedding_layer(x) + pos
+        data.append((X, y))
 
     return data
 
