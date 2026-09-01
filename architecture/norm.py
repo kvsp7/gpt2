@@ -9,6 +9,8 @@ class LayerNorm(torch.nn.Module):
 
     def forward(self, x):
         mean = x.mean(dim=-1, keepdim=True)
-        var = x.var(dim=-1, keepdims=True)
+        var = x.var(dim=-1, keepdims=True,  unbiased=False)
         norm_x = (x - mean) / torch.sqrt(self.eps + var)
         bnorm_x = self.scale * norm_x + self.shift
+
+        return bnorm_x
