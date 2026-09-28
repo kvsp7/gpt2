@@ -60,4 +60,4 @@ context = []
 for head in heads():
     context_vec = head(data)
     context.append(context_vec)
-# print(heads.shape)
+print(heads.shape)
