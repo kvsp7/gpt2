@@ -140,11 +140,11 @@ class TransformerBlock(torch.nn.Module):
         return x
 
 
-torch.manual_seed(123)
+# torch.manual_seed(123)
 
-x = torch.rand(2, 4, 768)
-block = TransformerBlock(config=GPT_CONFIG_124M)
-o = block(x)
+# x = torch.rand(2, 4, 768)
+# block = TransformerBlock(config=GPT_CONFIG_124M)
+# o = block(x)
 
-print(x.shape)
-print(o.shape) 
+# print(x.shape)
+# print(o.shape) 
