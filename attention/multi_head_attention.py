@@ -71,5 +71,4 @@ for x, y in train_data:
     )
     
 
-    
 
